@@ -70,7 +70,7 @@ func (c *Publisher) Publish(topic string, messages ...*message.Message) (err err
 	tr := otel.Tracer("scylla")
 	// Setup metrics
 	meter := global.Meter("scylla")
-	publishTracker := metric.Must(meter).NewInt64ValueRecorder("watermill_scylla_publish_ms")
+	publishTracker := metric.Must(meter).NewInt64Counter("watermill_scylla_publish_ms")
 	// Init context
 	c.publishWg.Add(1)
 	defer c.publishWg.Done()
